@@ -37,6 +37,7 @@
     <body>
 		<div class="container">
 			<h1>Área do Administrador</h1>
+			<a href="href="${pageContext.servletContext.contextPath}/admin"></a>
 		</div>
         <div class="container" style="padding:0px;background: #ccc;text-align:center;position: relative;">
             <h1>Cassino Wellson</h1>
