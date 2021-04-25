@@ -250,7 +250,7 @@ public class UserController extends HttpServlet {
                                     user.setNome(fieldValue);
                                     break;
                                 case "nascimento":
-                                    java.util.Date dataNascimento = new SimpleDateFormat("yyyy-mm-dd").parse(fieldValue);
+                                    java.util.Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(fieldValue);
                                     user.setNascimento(new Date(dataNascimento.getTime()));
                                     break;
                                 case "carteira":

@@ -64,11 +64,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="usuario-coin" class="control-label">Moedas</label>
-                    <input id="usuario-coin" class="form-control" type="text" name="carteira" required/>
-                </div>
-
-                <div class="form-group">
                     <label for="usuario-avatar">Foto do perfil</label>
                     <input type="file"
                            class="form-control" id="usuario-avatar"
