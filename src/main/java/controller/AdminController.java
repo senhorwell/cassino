@@ -81,7 +81,22 @@ public class AdminController extends HttpServlet {
                     dao = daoFactory.getUserDAO();
 
                     List<User> userList = dao.all();
-                    request.setAttribute("userList", userList);
+                    
+                    /*Lista de usuarios*/
+                    String json = "{'users': [";
+                    for (int i = 0; i < userList.size(); i++) {
+                    	json += "{'user':'"+userList.get(i).getLogin()+"',"
+            					+ "'id':" + userList.get(i).getId()
+            					+ "}";
+                    	if(i < (userList.size() - 1)) {
+                    		json += ",";
+                    	}
+                    	System.out.println();
+                    }
+                    json += "]}";
+                    /*Fim lista de usuarios*/
+                    
+                    request.setAttribute("userList", json);
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());
                 }
