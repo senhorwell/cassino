@@ -96,9 +96,11 @@
 
             <div class="container">
                 <p>
+                	<c:if test= "${personType == 1}">
                     <a class="btn btn-lg btn-primary" href="${pageContext.servletContext.contextPath}/user">
                         Lista de usuários
                     </a>                 
+                    </c:if>
                     <a class="btn btn-default"
                     href="${pageContext.servletContext.contextPath}/logout"
                     data-toggle="tooltip"

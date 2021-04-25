@@ -101,6 +101,7 @@ public class LoginController extends HttpServlet {
 
                     session.setAttribute("usuario", user);
                     session.setAttribute("carteira", user.getCarteira());
+                    session.setAttribute("personType", user.getPersonType());
                 } catch (ClassNotFoundException | IOException | SQLException | SecurityException ex) {
                     session.setAttribute("error", ex.getMessage());
                 }

@@ -28,7 +28,7 @@ public class PgUserDAO implements UserDAO {
                                 "VALUES(?, md5(?), ?, ?, ?);";
 
     private static final String READ_QUERY =
-                                "SELECT login, nome, nascimento, avatar, carteira " +
+                                "SELECT login, nome, nascimento, avatar, carteira, person_type " +
                                 "FROM j2ee.user " +
                                 "WHERE id = ?;";
 
@@ -67,12 +67,12 @@ public class PgUserDAO implements UserDAO {
                                 "ORDER BY id;";
 
     private static final String AUTHENTICATE_QUERY =
-                                "SELECT id, nome, nascimento, avatar,carteira " +
+                                "SELECT id, nome, nascimento, avatar,carteira, person_type " +
                                 "FROM j2ee.user " +
                                 "WHERE login = ? AND senha = md5(?);";
     
     private static final String GET_BY_LOGIN_QUERY =
-                                "SELECT id, login, nome, nascimento, avatar,carteira " +
+                                "SELECT id, login, nome, nascimento, avatar,carteira, person_type " +
                                 "FROM j2ee.user " +
                                 "WHERE login = ?;";
 
@@ -117,6 +117,7 @@ public class PgUserDAO implements UserDAO {
                     user.setNascimento(result.getDate("nascimento"));
                     user.setAvatar(result.getString("avatar"));
                     user.setCarteira(result.getInt("carteira"));
+                    user.setPersonType(result.getInt("person_type"));
                 } else {
                     throw new SQLException("Erro ao visualizar: usuário não encontrado.");
                 }
@@ -271,6 +272,7 @@ public class PgUserDAO implements UserDAO {
                     user.setNascimento(result.getDate("nascimento"));
                     user.setAvatar(result.getString("avatar"));
                     user.setCarteira(result.getInt("carteira"));
+                    user.setPersonType(result.getInt("person_type"));
                 } else {
                     throw new SecurityException("Login ou senha incorretos.");
                 }
@@ -297,6 +299,7 @@ public class PgUserDAO implements UserDAO {
                     user.setAvatar(result.getString("avatar"));
                     user.setLogin(login);
                     user.setCarteira(result.getInt("carteira"));
+                    user.setPersonType(result.getInt("person_type"));
                     return user;
 
                 } else {

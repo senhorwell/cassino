@@ -104,6 +104,7 @@ public abstract class DAOFactory implements AutoCloseable {
     }
 
     public abstract UserDAO getUserDAO();
+    public abstract PgLogDAO getLogDAO();
 
     @Override
     public void close() throws SQLException {
