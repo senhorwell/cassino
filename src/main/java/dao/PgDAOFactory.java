@@ -27,4 +27,9 @@ public class PgDAOFactory extends DAOFactory {
 		return new PgLogDAO(this.connection);
 	}
 
+	@Override
+	public PgGamesDAO getGamesDAO() {
+		return new PgGamesDAO(this.connection);
+	}
+
 }

@@ -105,11 +105,13 @@ public abstract class DAOFactory implements AutoCloseable {
 
     public abstract UserDAO getUserDAO();
     public abstract PgLogDAO getLogDAO();
+    public abstract PgGamesDAO getGamesDAO();
 
     @Override
     public void close() throws SQLException {
         closeConnection();
     }
+
 
 }
 
