@@ -15,17 +15,17 @@ public class PgGamesDAO {
 private Connection connection;
 	
 	private static final String CREATE_QUERY =
-            "INSERT INTO j2ee.games(nome, multiplicador) " +
+            "INSERT INTO wellson.games(nome, multiplicador) " +
             "VALUES(?, ?);";
 
 private static final String READ_QUERY =
             "SELECT nome, multiplicador " +
-            "FROM j2ee.games " +
+            "FROM wellson.games " +
             "WHERE id = ?;";
 
 private static final String ALL_QUERY =
 "SELECT id " +
-"FROM j2ee.games " +
+"FROM wellson.games " +
 "ORDER BY id;";
 
 

@@ -24,58 +24,61 @@ public class PgUserDAO implements UserDAO {
     private final Connection connection;
 
     private static final String CREATE_QUERY =
-                                "INSERT INTO j2ee.user(login, senha, nome, nascimento, avatar) " +
+                                "INSERT INTO wellson.user(login, senha, nome, nascimento, avatar) " +
                                 "VALUES(?, md5(?), ?, ?, ?);";
 
     private static final String READ_QUERY =
                                 "SELECT login, nome, nascimento, avatar, carteira, person_type " +
-                                "FROM j2ee.user " +
+                                "FROM wellson.user " +
                                 "WHERE id = ?;";
 
     private static final String UPDATE_QUERY =
-                                "UPDATE j2ee.user " +
+                                "UPDATE wellson.user " +
                                 "SET login = ?, nome = ?, nascimento = ? " +
                                 "WHERE id = ?;";
 
     private static final String UPDATE_WITH_PASSWORD_QUERY =
-                                "UPDATE j2ee.user " +
+                                "UPDATE wellson.user " +
                                 "SET login = ?, nome = ?, nascimento = ?, senha = md5(?) " +
                                 "WHERE id = ?;";
 
     private static final String UPDATE_WITH_AVATAR_QUERY =
-                                "UPDATE j2ee.user " +
+                                "UPDATE wellson.user " +
                                 "SET login = ?, nome = ?, nascimento = ?, avatar = ? " +
                                 "WHERE id = ?;";
 
     private static final String UPDATE_WITH_AVATAR_AND_PASSWORD_QUERY =
-                                "UPDATE j2ee.user " +
+                                "UPDATE wellson.user " +
                                 "SET login = ?, nome = ?, nascimento = ?, avatar = ?, senha = md5(?) " +
                                 "WHERE id = ?;";
 
-    private static final String UPDATE_CARTEIRA_QUERY = "UPDATE j2ee.user SET carteira = ? WHERE id = ?;";
+    private static final String UPDATE_CARTEIRA_QUERY = "UPDATE wellson.user SET carteira = ? WHERE id = ?;";
     
-    private static final String UPDATE_QUERY_GAME = "UPDATE j2ee.user SET carteira = ?"
+    private static final String UPDATE_QUERY_GAME = "UPDATE wellson.user SET carteira = ?"
 			+ "WHERE id = ?;";
     
     private static final String DELETE_QUERY =
-                                "DELETE FROM j2ee.user " +
+                                "DELETE FROM wellson.user " +
                                 "WHERE id = ?;";
 
     private static final String ALL_QUERY =
                                 "SELECT id, login " +
-                                "FROM j2ee.user " +
+                                "FROM wellson.user " +
                                 "ORDER BY id;";
 
     private static final String AUTHENTICATE_QUERY =
                                 "SELECT id, nome, nascimento, avatar,carteira, person_type " +
-                                "FROM j2ee.user " +
+                                "FROM wellson.user " +
                                 "WHERE login = ? AND senha = md5(?);";
     
     private static final String GET_BY_LOGIN_QUERY =
                                 "SELECT id, login, nome, nascimento, avatar,carteira, person_type " +
-                                "FROM j2ee.user " +
+                                "FROM wellson.user " +
                                 "WHERE login = ?;";
-
+    private static final String GET_PERDAS =
+					            "SELECT wellson.totalPerdas(? , ?)";
+    private static final String GET_GANHOS =
+            					"SELECT wellson.totalGanhos(? , ?)";
     public PgUserDAO(Connection connection) {
         this.connection = connection;
     }

@@ -15,17 +15,17 @@ public class PgLogDAO {
 	private Connection connection;
 	
 	private static final String CREATE_QUERY =
-            "INSERT INTO j2ee.log(user_id, game_id, house_gain, money) " +
+            "INSERT INTO wellson.log(user_id, game_id, house_gain, money) " +
             "VALUES(?, ?, ?, ?);";
 
 private static final String READ_QUERY =
             "SELECT user_id, game_id, house_gain, money " +
-            "FROM j2ee.log " +
+            "FROM wellson.log " +
             "WHERE id = ?;";
 
 private static final String ALL_QUERY =
 "SELECT id " +
-"FROM j2ee.log " +
+"FROM wellson.log " +
 "ORDER BY id;";
 
 
