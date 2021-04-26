@@ -64,7 +64,7 @@ public class PgUserDAO implements UserDAO {
     private static final String ALL_QUERY =
                                 "SELECT id, login " +
                                 "FROM wellson.user " +
-                                "ORDER BY id;";
+                                "ORDER BY id desc;";
 
     private static final String AUTHENTICATE_QUERY =
                                 "SELECT id, nome, nascimento, avatar,carteira, person_type " +

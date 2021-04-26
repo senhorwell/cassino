@@ -12,17 +12,14 @@
 <html>
     <head>
         <%@include file="/view/include/head.jsp"%>
+        <%@include file="/assets/css/style.jsp"  %>
         <title>Cassino Wellson - Usuários</title>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath}/img/favicon_io/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/img/favicon_io/favicon-16x16.png">
-        <link rel="manifest" href="${pageContext.request.contextPath}/img/site.webmanifest">
     </head>
     <body>
 
-        <div class="container">
-            
-            <div class="text-center div_inserir_excluir">
+		<%@include file="../../header.jsp"%>
+        <div class="container pt-5">
+            <div class="text-center div_inserir_excluir pb-5">
                 <a class="btn btn-lg btn-primary" href="${pageContext.servletContext.contextPath}/user/create">
                     Inserir novo usuário
                 </a>
@@ -30,12 +27,6 @@
                 <button class="btn btn-lg btn-warning" data-toggle="modal" data-target=".modal_excluir_usuarios">
                     Excluir múltiplos usuários
                 </button>
-                <a class="btn btn-default"
-                   href="${pageContext.servletContext.contextPath}/logout"
-                   data-toggle="tooltip"
-                   data-original-title="Logout">
-                    <i class="fa fa-sign-out"></i>
-                </a>
             </div>
 
             <form class="form_excluir_usuarios" action="${pageContext.servletContext.contextPath}/user/delete" method="POST">

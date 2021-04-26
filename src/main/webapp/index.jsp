@@ -7,19 +7,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html >
     <head>
         <%@include file="/view/include/head.jsp"%>
+        <%@include file="/assets/css/style.jsp"  %>
         <title>Cassino Wellson - Login</title>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath}/img/favicon_io/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/img/favicon_io/favicon-16x16.png">
-        <link rel="manifest" href="${pageContext.request.contextPath}/img/site.webmanifest">
     </head>
-    <body>
-        <div class="container">
+    <body id="login" class="main container">
+        <div class="wrapper">
+        	<div class="d-flex justify-content-center">
+        		<span class="logo"></span>
+        	</div>
             <form class="form-signin" action="${pageContext.servletContext.contextPath}/login" method="POST">
-                <h2 class="form-signin-heading">Por favor, faça login.</h2>
+                <h2 class="form-signin-heading text-center">Por favor, faça login.</h2>
 
                 <input class="form-control" type="text" name="login" placeholder="Usuário" required autofocus>
                 <input class="form-control" type="password" name="senha" placeholder="Senha" required>
