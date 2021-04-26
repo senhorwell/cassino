@@ -12,6 +12,7 @@ CREATE TABLE wellson.user(
     carteira integer DEFAULT 0,
     first_login date NOT NULL,
     last_login date NOT NULL,
+    person_type integer DEFAULT 0,
     CONSTRAINT pk_user PRIMARY KEY (id),
     CONSTRAINT uq_user_login UNIQUE (login)
 );
