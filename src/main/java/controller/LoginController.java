@@ -5,10 +5,14 @@
  */
 package controller;
 
+import dao.DAO;
 import dao.DAOFactory;
 import dao.UserDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,6 +55,12 @@ public class LoginController extends HttpServlet {
                 session = request.getSession(false);
 
                 if (session != null && session.getAttribute("usuario") != null) {
+                	try ( DAOFactory daoFactory = DAOFactory.getInstance()) {
+	                	DAO<User> dao;
+	                    dao = daoFactory.getUserDAO();
+	                    List<User> userList = dao.all();
+	                    request.setAttribute("userList", userList);
+                	}catch(Exception e){}
                     dispatcher = request.getRequestDispatcher("/welcome.jsp");
                 } else {
                     dispatcher = request.getRequestDispatcher("/index.jsp");
