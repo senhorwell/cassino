@@ -23,4 +23,8 @@ public interface DAO<T> {
     public void delete(Integer id) throws SQLException;
 
     public List<T> all() throws SQLException;
+	public List<T> allPlayers() throws SQLException;
+	
+	public Integer getGanhos(Integer userId) throws SQLException;
+	public Integer getPerdas(Integer userId) throws SQLException;
 }

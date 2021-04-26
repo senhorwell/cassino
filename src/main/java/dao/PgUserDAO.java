@@ -75,10 +75,20 @@ public class PgUserDAO implements UserDAO {
                                 "SELECT id, login, nome, nascimento, avatar,carteira, person_type " +
                                 "FROM wellson.user " +
                                 "WHERE login = ?;";
+//    private static final String GET_PERDAS =
+//					            "SELECT wellson.totalPerdas(?);";
+//    private static final String GET_GANHOS =
+//            					"SELECT wellson.totalGanhos(?);";
     private static final String GET_PERDAS =
-					            "SELECT wellson.totalPerdas(? , ?)";
-    private static final String GET_GANHOS =
-            					"SELECT wellson.totalGanhos(? , ?)";
+					            "SELECT count(*) as total FROM wellson.log WHERE house_gain = 1 AND user_id = ?;";
+	private static final String GET_GANHOS =
+								"SELECT count(*) as total FROM wellson.log WHERE house_gain = 0 AND user_id = ?;";
+	private static final String GET_BEST_PLAYERS =
+								"SELECT wellson.user.nome, count(*) as total " + 
+								"FROM wellson.log " + 
+								"INNER JOIN wellson.user " + 
+								"ON wellson.user.id = log.user_id AND house_gain = 0 " + 
+								"GROUP BY wellson.user.nome ORDER BY total desc;";
     public PgUserDAO(Connection connection) {
         this.connection = connection;
     }
@@ -261,6 +271,27 @@ public class PgUserDAO implements UserDAO {
 
         return userList;
     }
+    @Override
+    public List<User> allPlayers() throws SQLException {
+        List<User> userList = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(GET_BEST_PLAYERS);
+             ResultSet result = statement.executeQuery()) {
+            while (result.next()) {
+                User user = new User();
+                user.setNome(result.getString("nome"));
+                user.setGanho(result.getInt("total"));
+
+                userList.add(user);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PgUserDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+
+            throw new SQLException("Erro ao listar usuários.");
+        }
+
+        return userList;
+    }
 
     @Override
     public void authenticate(User user) throws SQLException, SecurityException {
@@ -287,6 +318,38 @@ public class PgUserDAO implements UserDAO {
         }
     }
     
+    @Override
+    public Integer getGanhos(Integer userId) throws SQLException{
+        try (PreparedStatement statement = connection.prepareStatement(GET_GANHOS)) {
+            statement.setInt(1, userId);
+
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    return result.getInt("total");
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException ex) {            
+            throw new SQLException("Erro ao obter ganhos");
+        }
+    }
+    @Override
+    public Integer getPerdas(Integer userId) throws SQLException{
+        try (PreparedStatement statement = connection.prepareStatement(GET_PERDAS)) {
+            statement.setInt(1, userId);
+
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    return result.getInt("total");
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException ex) {            
+            throw new SQLException("Erro ao obter ganhos");
+        }
+    }
     @Override
     public User getByLogin(String login) throws SQLException {
 

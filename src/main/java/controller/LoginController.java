@@ -58,8 +58,18 @@ public class LoginController extends HttpServlet {
                 	try ( DAOFactory daoFactory = DAOFactory.getInstance()) {
 	                	DAO<User> dao;
 	                    dao = daoFactory.getUserDAO();
-	                    List<User> userList = dao.all();
+	                    List<User> userList = dao.allPlayers();
 	                    request.setAttribute("userList", userList);
+	                    System.out.println("UserList" + userList);
+	                    System.out.println("UserName" + userList.get(0).getGanho());
+	                    User user = (User) session.getAttribute("usuario");
+                        UserDAO udao = daoFactory.getUserDAO();
+
+                        Integer ganhos = dao.getGanhos(user.getId());
+                        session.setAttribute("ganhos", ganhos);
+                        Integer perdas = dao.getPerdas(user.getId());
+                        session.setAttribute("perdas", perdas);
+
                 	}catch(Exception e){}
                     dispatcher = request.getRequestDispatcher("/welcome.jsp");
                 } else {

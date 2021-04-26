@@ -21,6 +21,7 @@ public class User {
     private String avatar;
     private Integer carteira;
     private Integer personType;
+    private Integer ganho;
 
     /**
      * @return the id
@@ -132,5 +133,19 @@ public class User {
      */
     public void setPersonType(Integer personType) {
         this.personType = personType;
-    }    
+    }
+    
+    /**
+     * @return the ganho
+     */
+    public Integer getGanho() {
+        return ganho;
+    }
+
+    /**
+     * @param ganho to set
+     */
+    public void setGanho(Integer ganho) {
+        this.ganho = ganho;
+    }
 }

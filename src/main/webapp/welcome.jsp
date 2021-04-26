@@ -21,7 +21,7 @@
             <div>
                 <div class="col-3 perda">
                     <p><strong>Perdas</strong></p>
-                    <h4><c:out value=" ${usuario.id}"/></h4>
+                    <h4><c:out value=" ${perdas}"/></h4>
                 </div>
                 
                 <a href="${pageContext.servletContext.contextPath}/user/carteira?id=${usuario.id}" class="col-3 carteira">
@@ -33,7 +33,7 @@
                 </a>
                 <div class="col-3 ganho">
                     <p><strong>Ganhos</strong></p>
-                    <h4><c:out value=" ${usuario.id}"/></h4>
+                    <h4><c:out value="${ganhos}"/></h4>
                 </div>
 
             </div>
@@ -49,10 +49,10 @@
                 <c:forEach var="usuario" items="${requestScope.userList}">
                     <tr>
                         <td>
-                            <span class="h4"><c:out value="${usuario.login}"/></span>
+                            <span class="h4"><c:out value="${usuario.nome}"/></span>
                         </td>
                         <td>
-                            <span class="h4"><c:out value="${usuario.id}"/></span>
+                            <span class="h4"><c:out value="${usuario.ganho}"/></span>
                         </td>
                     </tr>
                 </c:forEach>
