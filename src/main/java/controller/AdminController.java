@@ -85,7 +85,7 @@ public class AdminController extends HttpServlet {
                     String json = "{'users': [";
                     Integer j = userList.size();
                     if (j > 3) j = 3;
-                    for (int i = 0; i < userList.size(); i++) {
+                    for (int i = 0; i < j; i++) {
                     	json += "{'user':'"+userList.get(i).getLogin()+"',"
             					+ "'id':" + userList.get(i).getId()
             					+ "}";
@@ -99,8 +99,8 @@ public class AdminController extends HttpServlet {
                     List<User> vitoriasList = dao.getVitoriasList();
                     json += "'vitorias': [";
                     j = vitoriasList.size();
-                    if (j > 3) j = 5;
-                    for (int i = 0; i < vitoriasList.size(); i++) {
+                    if (j > 5) j = 5;
+                    for (int i = 0; i < j; i++) {
                     	json += "{'nome':'"+vitoriasList.get(i).getNome()+"',"
             					+ "'vitoria':" + vitoriasList.get(i).getVitorias()
             					+ "}";
@@ -135,7 +135,7 @@ public class AdminController extends HttpServlet {
                     json += "'players': [";
                     j = userList.size();
                     if (j > 3) j = 3;
-                    for (int i = 0; i < userList.size(); i++) {
+                    for (int i = 0; i < j; i++) {
                     	json += "{'nome':'"+userList.get(i).getNome()+"',"
             					+ "'vitorias':" + userList.get(i).getVitorias()
             					+ "}";
