@@ -21,6 +21,7 @@ public class User {
     private String avatar;
     private Integer carteira;
     private Integer personType;
+    private Integer vitorias;
     private Integer ganho;
 
     /**
@@ -147,5 +148,19 @@ public class User {
      */
     public void setGanho(Integer ganho) {
         this.ganho = ganho;
+    }
+    
+    /**
+     * @return the vitorias
+     */
+    public Integer getVitorias() {
+        return vitorias;
+    }
+
+    /**
+     * @param ganho to set
+     */
+    public void setVitorias(Integer vitorias) {
+        this.vitorias = vitorias;
     }
 }

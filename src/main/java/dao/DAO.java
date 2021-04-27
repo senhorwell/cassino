@@ -27,4 +27,5 @@ public interface DAO<T> {
 	
 	public Integer getGanhos(Integer userId) throws SQLException;
 	public Integer getPerdas(Integer userId) throws SQLException;
+	List<User> getVitoriasList() throws SQLException;
 }

@@ -89,6 +89,13 @@ public class PgUserDAO implements UserDAO {
 								"INNER JOIN wellson.user " + 
 								"ON wellson.user.id = log.user_id AND house_gain = 0 " + 
 								"GROUP BY wellson.user.nome ORDER BY total desc;";
+    private static final String GET_VITORIAS =
+                                "SELECT wellson.user.nome as nome, sum(wellson.log.money) as total " +
+                                "FROM wellson.log " +
+                                "INNER JOIN wellson.user " +
+                                "ON wellson.user.id = log.user_id AND house_gain = 0 " +
+                                "GROUP BY wellson.user.nome ORDER BY total desc;";
+                        
     public PgUserDAO(Connection connection) {
         this.connection = connection;
     }
@@ -280,7 +287,7 @@ public class PgUserDAO implements UserDAO {
             while (result.next()) {
                 User user = new User();
                 user.setNome(result.getString("nome"));
-                user.setGanho(result.getInt("total"));
+                user.setVitorias(result.getInt("total"));
 
                 userList.add(user);
             }
@@ -292,7 +299,27 @@ public class PgUserDAO implements UserDAO {
 
         return userList;
     }
+    @Override
+    public List<User> getVitoriasList() throws SQLException {
+        List<User> userList = new ArrayList<>();
 
+        try (PreparedStatement statement = connection.prepareStatement(GET_VITORIAS);
+             ResultSet result = statement.executeQuery()) {
+            while (result.next()) {
+                User user = new User();
+                user.setNome(result.getString("nome"));
+                user.setVitorias(result.getInt("total"));
+
+                userList.add(user);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PgUserDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+
+            throw new SQLException("Erro ao listar usuários.");
+        }
+
+        return userList;
+    }
     @Override
     public void authenticate(User user) throws SQLException, SecurityException {
         try (PreparedStatement statement = connection.prepareStatement(AUTHENTICATE_QUERY)) {

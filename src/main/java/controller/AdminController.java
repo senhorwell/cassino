@@ -80,10 +80,11 @@ public class AdminController extends HttpServlet {
                 try ( DAOFactory daoFactory = DAOFactory.getInstance()) {
                     dao = daoFactory.getUserDAO();
 
-                    List<User> userList = dao.all();
-                    
                     /*Lista de usuarios*/
+                    List<User> userList = dao.all();                    
                     String json = "{'users': [";
+                    Integer j = userList.size();
+                    if (j > 3) j = 3;
                     for (int i = 0; i < userList.size(); i++) {
                     	json += "{'user':'"+userList.get(i).getLogin()+"',"
             					+ "'id':" + userList.get(i).getId()
@@ -91,11 +92,26 @@ public class AdminController extends HttpServlet {
                     	if(i < (userList.size() - 1)) {
                     		json += ",";
                     	}
-                    	System.out.println();
                     }
-                    json += "]}";
-                    /*Fim lista de usuarios*/
+                    json += "],";
                     
+                    /*Lista de Vitorias*/
+                    List<User> vitoriasList = dao.getVitoriasList();
+                    json += "'vitorias': [";
+                    j = vitoriasList.size();
+                    if (j > 3) j = 5;
+                    for (int i = 0; i < vitoriasList.size(); i++) {
+                    	json += "{'nome':'"+vitoriasList.get(i).getNome()+"',"
+            					+ "'vitoria':" + vitoriasList.get(i).getVitorias()
+            					+ "}";
+                    	if(i < (vitoriasList.size() - 1)) {
+                    		json += ",";
+                    	}
+                    }
+                   	json += "]";
+                   	/*Fim lista de Vitorias*/
+                   	
+                   	json += "}";
                     request.setAttribute("userList", json);
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());
