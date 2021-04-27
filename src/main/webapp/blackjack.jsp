@@ -9,7 +9,7 @@
 <html>
     <head>
         <%@include file="/view/include/head.jsp"  %>
-        <title>Cassino Wellson - Blackjack]</title>
+        <title>Cassino Wellson - Blackjack</title>
         <%@include file="/assets/css/style.jsp"  %>
     </head>
     <body id="blackjack">
@@ -39,7 +39,5 @@
         </div>
 
         <%@include file="/view/include/scripts.jsp"%>
-        <script src="${pageContext.servletContext.contextPath}/assets/js/user.js"></script>
-        <script src="${pageContext.servletContext.contextPath}/assets/js/popup.js"></script>   
     </body>
 </html>

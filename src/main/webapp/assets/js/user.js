@@ -33,7 +33,28 @@ function deleteUsers(e) {
     e.preventDefault();
     $('.form_excluir_usuarios').submit();
 }
-
+function showAlertBJ() {
+	resultado = document.getElementById('result_id').value;
+	
+	if (resultado == 21) {
+		alert("Voce ganhou");
+	}else if (resultado > 15 && resultado <= 21) {
+		alert("Voce ganhou");
+	}else {
+ 		alert("Voce perdeu");
+	}
+}
+function showAlertSM(){
+	result1 = document.getElementById('resultA_id').value;
+	result2 = document.getElementById('resultB_id').value;
+	result3 = document.getElementById('resultC_id').value;
+	
+	if (result1 == result2 && result1 == result3) {
+	alert("Voce ganhou");
+	}else {
+	 alert("Voce perdeu");
+	}
+}
 function readUser(e) {
     e.preventDefault();
     $.get($(this).data('href'), function (data) {
