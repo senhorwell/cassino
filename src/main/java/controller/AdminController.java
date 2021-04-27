@@ -361,7 +361,7 @@ public class AdminController extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-            	response.sendRedirect(request.getContextPath() + "/welcome.jsp");
+            	response.sendRedirect(request.getContextPath());
             	break;
             }
             

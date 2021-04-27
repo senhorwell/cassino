@@ -53,7 +53,7 @@
 	                    	</button>
 	                    </form>
 	                    <p> </p>
-	                    	<a class="btn btn-lg btn-primary" href="${pageContext.servletContext.contextPath}/welcome.jsp">
+	                    	<a class="btn btn-lg btn-primary" href="${pageContext.servletContext.contextPath}">
 	                        Volta a tela principal
 	                    	</a> 
 	            </div>
