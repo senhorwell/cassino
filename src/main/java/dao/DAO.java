@@ -28,4 +28,6 @@ public interface DAO<T> {
 	public Integer getGanhos(Integer userId) throws SQLException;
 	public Integer getPerdas(Integer userId) throws SQLException;
 	List<User> getVitoriasList() throws SQLException;
+	Integer getNumGames(Integer gameId) throws SQLException;
+	Integer getBalanceGame(Integer who, Integer gameId) throws SQLException;
 }

@@ -108,10 +108,30 @@ public class AdminController extends HttpServlet {
                     		json += ",";
                     	}
                     }
-                   	json += "]";
-                   	/*Fim lista de Vitorias*/
+                   	json += "],";
+                   	/*Numero de jogos jogados */
+                   	json += "'jogos': [";
+                   	json += "{'nome':'Blackjack',"
+        					+ "'numero':" + dao.getNumGames(1)
+        					+ "},";
+                   	json += "{'nome':'Slotmachine',"
+        					+ "'numero':" + dao.getNumGames(2)
+        					+ "}";
+                   	json += "],";
                    	
-                   	json += "}";
+                   	/*Numero de ganhos */
+                   	json += "'ganhos': [";
+                   	json += "{'nome':'Blackjack',"
+                   			+ "'ganhos':" + dao.getBalanceGame(1,1)
+                   			+ ",'perdas':" + dao.getBalanceGame(0,1)
+        					+ "},";
+                   	json += "{'nome':'Slotmachine',"
+                   			+ "'ganhos':" + dao.getBalanceGame(1,2)
+                   			+ ",'perdas':" + dao.getBalanceGame(0,2)
+        					+ "}";
+                   	json += "],";
+                   	
+                	json += "}";
                     request.setAttribute("userList", json);
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());

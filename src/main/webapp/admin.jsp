@@ -19,16 +19,14 @@
         	google.charts.load('current', {'packages':['corechart']});
 
         	var userList= ${userList};
-        	
+        	console.log(userList);
         	function bestPlayers(){
             	var tabela = new google.visualization.DataTable();
               	
-				console.log(userList);
 	            tabela.addColumn('string','nome');
               	tabela.addColumn('number','acessos');
 	
              	for (i = 0; i < userList["users"].length; i++) {
-					console.log(i, userList["users"][i]["id"], userList["users"][i]["user"]);
 					tabela.addRows([
 						[userList["users"][i]["user"],userList["users"][i]["id"]]
 					]);
@@ -44,16 +42,12 @@
 	            tabela.addColumn('string','nome');
               	tabela.addColumn('number','acessos');
 	
-             	/*for (i = 0; i < userList["users"].length; i++) {
-					console.log(i, userList["users"][i]["id"], userList["users"][i]["user"]);
+             	for (i = 0; i < userList["jogos"].length; i++) {
 					tabela.addRows([
-						[userList["users"][i]["user"],userList["users"][i]["id"]]
+						[userList["jogos"][i]["nome"],userList["jogos"][i]["numero"]]
 					]);
-          		}*/
-             	tabela.addRows([
-             		["Blackjack",2000],
-             		["Slotmachine",1500]
-				]);
+          		}
+
 				var grafico = new google.visualization.PieChart(document.getElementById('bestGame'));
 				grafico.draw(tabela);
 			}
@@ -61,8 +55,7 @@
 		    
 		    function balancaBlackjack(){
             	var tabela = new google.visualization.DataTable();
-              	var userList= ${userList};
-				console.log(userList);
+
 	            tabela.addColumn('string','nome');
               	tabela.addColumn('number','balanca');
 	
@@ -73,8 +66,8 @@
 					]);
           		}*/
              	tabela.addRows([
-             		["Ganhos",1234],
-             		["Perdas",500]
+             		["Ganhos",userList["ganhos"][0]["ganhos"]],
+             		["Perdas",userList["ganhos"][0]["perdas"]]
 				]);
 				var grafico = new google.visualization.PieChart(document.getElementById('balancaBlackjack'));
 				grafico.draw(tabela);
@@ -95,8 +88,8 @@
 					]);
           		}*/
              	tabela.addRows([
-             		["Ganhos",183],
-             		["Perdas",1500]
+             		["Ganhos",userList["ganhos"][1]["ganhos"]],
+             		["Perdas",userList["ganhos"][1]["perdas"]]
 				]);
 				var grafico = new google.visualization.PieChart(document.getElementById('balancaSlotmachine'));
 				grafico.draw(tabela);
@@ -116,7 +109,6 @@
               	tabela.addColumn('number','vitorias');
 	
              	for (i = 0; i < userList["vitorias"].length; i++) {
-					console.log(i, userList["vitorias"][i]["nome"], userList["vitorias"][i]["vitoria"]);
 					tabela.addRows([
 						[userList["vitorias"][i]["nome"], userList["vitorias"][i]["vitoria"]]
 					]);

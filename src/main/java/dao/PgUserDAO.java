@@ -95,7 +95,10 @@ public class PgUserDAO implements UserDAO {
                                 "INNER JOIN wellson.user " +
                                 "ON wellson.user.id = log.user_id AND house_gain = 0 " +
                                 "GROUP BY wellson.user.nome ORDER BY total desc;";
-                        
+    private static final String GET_NUM_GAMES = 
+    							"SELECT count(*) as total FROM wellson.log WHERE game_id = ?;";
+    private static final String GET_BALANCE_GAME = 
+    							"SELECT sum(wellson.log.money) as total FROM wellson.log WHERE house_gain = ? AND game_id = ?;";
     public PgUserDAO(Connection connection) {
         this.connection = connection;
     }
@@ -359,6 +362,39 @@ public class PgUserDAO implements UserDAO {
             }
         } catch (SQLException ex) {            
             throw new SQLException("Erro ao obter ganhos");
+        }
+    }
+    @Override
+    public Integer getNumGames(Integer gameId) throws SQLException{
+        try (PreparedStatement statement = connection.prepareStatement(GET_NUM_GAMES)) {
+            statement.setInt(1, gameId);
+
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    return result.getInt("total");
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException ex) {            
+            throw new SQLException("Erro ao obter numero");
+        }
+    }
+    @Override
+    public Integer getBalanceGame(Integer who,Integer gameId) throws SQLException{
+        try (PreparedStatement statement = connection.prepareStatement(GET_BALANCE_GAME)) {
+            statement.setInt(1, who);
+            statement.setInt(2, gameId);
+
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    return result.getInt("total");
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException ex) {            
+            throw new SQLException("Erro ao obter numero");
         }
     }
     @Override
