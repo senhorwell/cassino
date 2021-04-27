@@ -89,6 +89,10 @@
 	#welcome #best-players {
 		margin-top: 40px;padding: 0px;
 	}
+	#welcome #best-players h4 {
+		color:white;
+		text-align: center;
+	}
 	#welcome #best-players table{
 		box-shadow: 10px 10px 5px #000;
 	}

@@ -5,12 +5,8 @@
  */
 package controller;
 
-import dao.DAO;
-import dao.DAOFactory;
-import dao.UserDAO;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -20,6 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dao.DAO;
+import dao.DAOFactory;
+import dao.UserDAO;
 import model.User;
 
 /**
@@ -35,7 +35,12 @@ import model.User;
         })
 public class LoginController extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -58,12 +63,9 @@ public class LoginController extends HttpServlet {
                 	try ( DAOFactory daoFactory = DAOFactory.getInstance()) {
 	                	DAO<User> dao;
 	                    dao = daoFactory.getUserDAO();
-	                    List<User> userList = dao.allPlayers();
+	                    List<User> userList = dao.getVitoriasList();
 	                    request.setAttribute("userList", userList);
-	                    System.out.println("UserList" + userList);
-	                    System.out.println("UserName" + userList.get(0).getGanho());
 	                    User user = (User) session.getAttribute("usuario");
-                        UserDAO udao = daoFactory.getUserDAO();
 
                         Integer ganhos = dao.getGanhos(user.getId());
                         session.setAttribute("ganhos", ganhos);

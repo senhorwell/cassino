@@ -32,7 +32,7 @@
                     </div>
                 </a>
                 <div class="col-3 ganho">
-                    <p><strong>Ganhos</strong></p>
+                    <p><strong>Vitorias</strong></p>
                     <h4><c:out value="${ganhos}"/></h4>
                 </div>
 
@@ -44,7 +44,7 @@
             <table>
                 <tr>
                   <th>Nome</th>
-                  <th>Vitórias</th>
+                  <th>Ganhos</th>
                 </tr>
                 <c:forEach var="usuario" items="${requestScope.userList}">
                     <tr>
@@ -52,7 +52,7 @@
                             <span class="h4"><c:out value="${usuario.nome}"/></span>
                         </td>
                         <td>
-                            <span class="h4"><c:out value="${usuario.ganho}"/></span>
+                            <span class="h4"><c:out value="${usuario.vitorias}"/></span>
                         </td>
                     </tr>
                 </c:forEach>
