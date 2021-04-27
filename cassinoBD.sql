@@ -25,7 +25,7 @@ CREATE TABLE wellson.games(
 );  
 
 CREATE TABLE wellson.log(
-    id serial NOT NULL,
+    id serial,
     user_id serial NOT NULL,
     game_id serial NOT NULL,
     house_gain integer,
