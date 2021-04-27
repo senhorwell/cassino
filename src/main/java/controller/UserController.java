@@ -425,26 +425,32 @@ public class UserController extends HttpServlet {
                 }
                 user = dao.read(idUser);
                 user.setId(idUser);
-                if (resultado == 21) {
-                	carteira = user.getCarteira() + (aposta * dao.getMultiply(1));
-
-                	dao.gameLog(idUser, 1, 0, aposta);
-                	user.setCarteira(carteira);
-                	dao.updateJogo(user);
-                	
-            	} else if (resultado > 15 && resultado <= 20) {
-                	dao.gameLog(idUser, 1, 0, aposta);
-                    carteira = user.getCarteira() + aposta;
-                	user.setCarteira(carteira);
-                	dao.updateJogo(user);
-                	
-            	} else {
-            		dao.gameLog(idUser, 1, 1, aposta);
-            		carteira = user.getCarteira() - aposta;
-            		user.setCarteira(carteira);
-            		dao.updateJogo(user);
-            		
-            	}
+                
+                Integer carteiraBd = dao.getCarteira(user.getId());
+                
+                if(carteiraBd >= aposta) {
+	                if (resultado == 21) {
+	                	carteira = user.getCarteira() + (aposta * dao.getMultiply(1));
+	
+	                	dao.gameLog(idUser, 1, 0, aposta);
+	                	user.setCarteira(carteira);
+	                	dao.updateJogo(user);
+	                	
+	            	} else if (resultado > 15 && resultado <= 20) {
+	                	dao.gameLog(idUser, 1, 0, aposta);
+	                    carteira = user.getCarteira() + aposta;
+	                	user.setCarteira(carteira);
+	                	dao.updateJogo(user);
+	                	
+	            	} else {
+	            		dao.gameLog(idUser, 1, 1, aposta);
+	            		carteira = user.getCarteira() - aposta;
+	            		user.setCarteira(carteira);
+	            		dao.updateJogo(user);
+	            		
+	            	}
+	            	
+	            }
                 session.setAttribute("carteira", user.getCarteira());
         	   } catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -510,19 +516,22 @@ public class UserController extends HttpServlet {
         	    }
         	    user = dao.read(idUser);
                 user.setId(idUser);
-                if (resultado1.equals(resultado2) && resultado1.equals(resultado3)) {
-                	dao.gameLog(idUser, 2, 0, 10);
-                    carteira = user.getCarteira() + (10 * dao.getMultiply(2));
-                	user.setCarteira(carteira);
-                	dao.updateJogo(user);
-                	
-            	} else {
-            		dao.gameLog(idUser, 2, 1, 5);
-            		carteira = user.getCarteira() - 5;
-            		user.setCarteira(carteira);
-            		dao.updateJogo(user);
-            		
-            	}
+                Integer carteiraBd = dao.getCarteira(user.getId());
+                if(carteiraBd >= 5) {
+	                if (resultado1.equals(resultado2) && resultado1.equals(resultado3)) {
+	                	dao.gameLog(idUser, 2, 0, 10);
+	                    carteira = user.getCarteira() + (10 * dao.getMultiply(2));
+	                	user.setCarteira(carteira);
+	                	dao.updateJogo(user);
+	                	
+	            	} else {
+	            		dao.gameLog(idUser, 2, 1, 5);
+	            		carteira = user.getCarteira() - 5;
+	            		user.setCarteira(carteira);
+	            		dao.updateJogo(user);
+	            		
+	            	}
+                }
                 session.setAttribute("carteira", user.getCarteira());
         	   } catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
