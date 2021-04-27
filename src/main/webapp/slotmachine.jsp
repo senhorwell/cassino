@@ -20,6 +20,7 @@
 	                <h1>Bem-vindo a Slot machine,
 	                <c:out value="${usuario.nome}"/>!</h1>
 	                <p>Insira o resultado desejado </p>
+           	        <p>Carteira: <c:out value="${carteira}"/> </p>
 	                	<form id = "game" class="form-signin" onsubmit="return showAlertSM();" action="${pageContext.servletContext.contextPath}/user/game/slotmachine?id=${usuario.id}" method="POST">
 						<input type="hidden" name="id" value="${usuario.id}">
 	                		<select id="resultA_id" name="resultado1" class="form-control" required>

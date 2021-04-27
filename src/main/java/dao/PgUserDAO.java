@@ -26,7 +26,9 @@ public class PgUserDAO implements UserDAO {
     private static final String CREATE_QUERY =
                                 "INSERT INTO wellson.user(login, senha, nome, nascimento, avatar) " +
                                 "VALUES(?, md5(?), ?, ?, ?);";
-
+    private static final String GAME_LOG =
+                                "INSERT INTO wellson.log(user_id, game_id, house_gain, money) " +
+                                "VALUES(?, ?, ?, ?);";
     private static final String READ_QUERY =
                                 "SELECT login, nome, nascimento, avatar, carteira, person_type " +
                                 "FROM wellson.user " +
@@ -54,8 +56,7 @@ public class PgUserDAO implements UserDAO {
 
     private static final String UPDATE_CARTEIRA_QUERY = "UPDATE wellson.user SET carteira = ? WHERE id = ?;";
     
-    private static final String UPDATE_QUERY_GAME = "UPDATE wellson.user SET carteira = ?"
-			+ "WHERE id = ?;";
+    private static final String UPDATE_QUERY_GAME = "UPDATE wellson.user SET carteira = ? WHERE id = ?;";
     
     private static final String DELETE_QUERY =
                                 "DELETE FROM wellson.user " +
@@ -125,7 +126,27 @@ public class PgUserDAO implements UserDAO {
             }
         }
     }
+    @Override
+    public void gameLog(Integer userId, Integer gameId, Integer who, Integer money) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(GAME_LOG)) {
+            statement.setInt(1, userId);
+            statement.setInt(2, gameId);
+            statement.setInt(3, who);
+            statement.setInt(4, money);
 
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PgUserDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+
+            if (ex.getMessage().contains("uq_user_login")) {
+                throw new SQLException("Erro ao inserir usuário: login já existente.");
+            } else if (ex.getMessage().contains("not-null")) {
+                throw new SQLException("Erro ao inserir usuário: pelo menos um campo está em branco.");
+            } else {
+                throw new SQLException("Erro ao inserir o dado.");
+            }
+        }
+    }
     @Override
     public User read(Integer id) throws SQLException {
         User user = new User();

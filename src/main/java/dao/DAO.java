@@ -30,4 +30,5 @@ public interface DAO<T> {
 	List<User> getVitoriasList() throws SQLException;
 	Integer getNumGames(Integer gameId) throws SQLException;
 	Integer getBalanceGame(Integer who, Integer gameId) throws SQLException;
+	void gameLog(Integer userId, Integer gameId, Integer who, Integer money) throws SQLException;
 }

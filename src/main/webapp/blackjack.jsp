@@ -20,7 +20,7 @@
 	                <h1>Bem-vindo ao jogo 21,
 	                <c:out value="${usuario.nome}"/>!</h1>
 	                <p>Insira sua aposta e o resultado desejado (>15 vitoria) </p>
-	                <p>Carteira: <c:out value="${usuario.carteira}"/> </p>
+	                <p>Carteira: <c:out value="${carteira}"/> </p>
 	                	<form enctype='multipart/form-data' id = "game" class="form-signin" onsubmit="return showAlertBJ();" action="${pageContext.servletContext.contextPath}/user/game/blackjack" method="POST">
 	                		<input type="hidden" name="id" value="${usuario.id}">
 	                		<input class="form-control" type="text" name="aposta" placeholder="Aposta" required>

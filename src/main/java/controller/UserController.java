@@ -82,7 +82,7 @@ public class UserController extends HttpServlet {
         DAO<User> dao;
         User user;
         RequestDispatcher dispatcher;
-
+        HttpSession session = request.getSession();
         switch (request.getServletPath()) {
             case "/user": {
                 try ( DAOFactory daoFactory = DAOFactory.getInstance()) {
@@ -409,6 +409,7 @@ public class UserController extends HttpServlet {
                 BufferedReader reader = request.getReader();
                 String line;
                 dao = daoFactory.getUserDAO();
+                
                 Integer i = 0,aposta = 0,resultado = 0,idUser = 0, carteira = 0;
                 while ((line = reader.readLine()) != null) {
                     i = i + 1;
@@ -425,16 +426,19 @@ public class UserController extends HttpServlet {
                 user = dao.read(idUser);
                 user.setId(idUser);
                 if (resultado > 15 && resultado <= 21) {
+                	dao.gameLog(idUser, 1, 0, aposta);
                     carteira = user.getCarteira() + aposta;
                 	user.setCarteira(carteira);
                 	dao.updateJogo(user);
                 	
             	} else {
+            		dao.gameLog(idUser, 1, 1, aposta);
             		carteira = user.getCarteira() - aposta;
             		user.setCarteira(carteira);
             		dao.updateJogo(user);
             		
             	}
+                session.setAttribute("carteira", user.getCarteira());
         	   } catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -500,16 +504,19 @@ public class UserController extends HttpServlet {
         	    user = dao.read(idUser);
                 user.setId(idUser);
                 if (resultado1.equals(resultado2) && resultado1.equals(resultado3)) {
+                	dao.gameLog(idUser, 2, 0, 10);
                     carteira = user.getCarteira() + 10;
                 	user.setCarteira(carteira);
                 	dao.updateJogo(user);
                 	
             	} else {
+            		dao.gameLog(idUser, 2, 1, 5);
             		carteira = user.getCarteira() - 5;
             		user.setCarteira(carteira);
             		dao.updateJogo(user);
             		
             	}
+                session.setAttribute("carteira", user.getCarteira());
         	   } catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
