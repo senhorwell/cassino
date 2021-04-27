@@ -26,9 +26,9 @@
 	            tabela.addColumn('string','nome');
               	tabela.addColumn('number','acessos');
 	
-             	for (i = 0; i < userList["users"].length; i++) {
+             	for (i = 0; i < userList["players"].length; i++) {
 					tabela.addRows([
-						[userList["users"][i]["user"],userList["users"][i]["id"]]
+						[userList["players"][i]["nome"],userList["players"][i]["vitorias"]]
 					]);
           		}
 			

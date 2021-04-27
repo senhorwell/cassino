@@ -130,7 +130,20 @@ public class AdminController extends HttpServlet {
                    			+ ",'perdas':" + dao.getBalanceGame(0,2)
         					+ "}";
                    	json += "],";
-                   	
+                   	/*Lista de usuarios*/
+                    userList = dao.allPlayersPlay();                    
+                    json += "'players': [";
+                    j = userList.size();
+                    if (j > 3) j = 3;
+                    for (int i = 0; i < userList.size(); i++) {
+                    	json += "{'nome':'"+userList.get(i).getNome()+"',"
+            					+ "'vitorias':" + userList.get(i).getVitorias()
+            					+ "}";
+                    	if(i < (userList.size() - 1)) {
+                    		json += ",";
+                    	}
+                    }
+                    json += "],";
                 	json += "}";
                     request.setAttribute("userList", json);
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
