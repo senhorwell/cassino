@@ -69,7 +69,7 @@ public class LoginController extends HttpServlet {
 
 	                    Integer ganhos = dao.getGanhos(user.getId());
                         session.setAttribute("ganhos", ganhos);
-                        Integer carteira = user.getCarteira();
+                        Integer carteira = dao.getCarteira(user.getId());
                         session.setAttribute("carteira", carteira);
                         Integer perdas = dao.getPerdas(user.getId());
                         session.setAttribute("perdas", perdas);
