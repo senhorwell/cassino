@@ -425,7 +425,14 @@ public class UserController extends HttpServlet {
                 }
                 user = dao.read(idUser);
                 user.setId(idUser);
-                if (resultado > 15 && resultado <= 21) {
+                if (resultado == 21) {
+                	carteira = user.getCarteira() + (aposta * dao.getMultiply(1));
+
+                	dao.gameLog(idUser, 1, 0, aposta);
+                	user.setCarteira(carteira);
+                	dao.updateJogo(user);
+                	
+            	} else if (resultado > 15 && resultado <= 20) {
                 	dao.gameLog(idUser, 1, 0, aposta);
                     carteira = user.getCarteira() + aposta;
                 	user.setCarteira(carteira);
@@ -505,7 +512,7 @@ public class UserController extends HttpServlet {
                 user.setId(idUser);
                 if (resultado1.equals(resultado2) && resultado1.equals(resultado3)) {
                 	dao.gameLog(idUser, 2, 0, 10);
-                    carteira = user.getCarteira() + 10;
+                    carteira = user.getCarteira() + (10 * dao.getMultiply(2));
                 	user.setCarteira(carteira);
                 	dao.updateJogo(user);
                 	

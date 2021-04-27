@@ -106,6 +106,8 @@ public class PgUserDAO implements UserDAO {
     							"SELECT count(*) as total FROM wellson.log WHERE game_id = ?;";
     private static final String GET_BALANCE_GAME = 
     							"SELECT sum(wellson.log.money) as total FROM wellson.log WHERE house_gain = ? AND game_id = ?;";
+    private static final String GET_MULTIPLY = 
+    							"SELECT multiplicador FROM wellson.games WHERE id = ?;";
     public PgUserDAO(Connection connection) {
         this.connection = connection;
     }
@@ -437,6 +439,22 @@ public class PgUserDAO implements UserDAO {
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
                     return result.getInt("total");
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException ex) {            
+            throw new SQLException("Erro ao obter numero");
+        }
+    }
+    @Override
+    public Integer getMultiply(Integer gameId) throws SQLException{
+        try (PreparedStatement statement = connection.prepareStatement(GET_MULTIPLY)) {
+            statement.setInt(1, gameId);
+
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    return result.getInt("multiplicador");
                 } else {
                     return null;
                 }
